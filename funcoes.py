@@ -20,3 +20,9 @@ def desenhar_gol_estado(posicoes):
     print("|---------+-------+------|")
     print(f"|   {get_val(2):^3}   |       |  {get_val(5):^3} |")
     print("+-------------------------+")
+
+def chute(numero):
+    dicionario = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+    if numero in dicionario:
+        dicionario[numero] = 1
+    return dicionario
