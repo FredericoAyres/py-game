@@ -72,3 +72,9 @@ def chute_alternadas(numero):
     if numero in dicionario:
         dicionario[numero] = 1
     return dicionario
+
+def defesa_alternadas(numero):
+    dicionario = {1: 0, 2: 0, 3: 0}
+    if numero in dicionario:
+        dicionario[numero] = 2
+    return dicionario
