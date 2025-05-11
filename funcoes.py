@@ -27,8 +27,18 @@ def chute(numero):
         dicionario[numero] = 1
     return dicionario
 
-def defesa_computador(numero):
+def defesa(numero):
     dicionario = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
     if numero in dicionario:
         dicionario[numero] = 2
+    return dicionario
+
+def soma_dicionarios(dicionario1, dicionario2):
+    dicionario = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+    for x in dicionario1:
+        if x in dicionario:
+            dicionario[x] += dicionario1[x]
+    for x in dicionario2:
+        if x in dicionario:
+            dicionario[x] += dicionario2[x]
     return dicionario
