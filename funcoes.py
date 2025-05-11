@@ -42,3 +42,27 @@ def soma_dicionarios(dicionario1, dicionario2):
         if x in dicionario:
             dicionario[x] += dicionario2[x]
     return dicionario
+
+def desenhar_gol_estado_3(posicoes):
+    """
+    Versão reduzida do gol com 3 posições:
+    - 1: canto esquerdo
+    - 2: meio
+    - 3: canto direito
+    Valores possíveis:
+    - 0: vazio → mostra o número da posição
+    - 1: chute do jogador ('C')
+    - 2: goleiro ('G')
+    - 3: ambos ('X')
+    """
+    simbolos = {
+        1: 'C',
+        2: 'G',
+        3: 'X'
+    }
+    def get_val(i):
+        valor = posicoes.get(i, 0)
+        return simbolos[valor] if valor in simbolos else str(i)
+    print("+-------------------------+")
+    print(f"|   {get_val(1):^3}   |  {get_val(2):^3}  |  {get_val(3):^3} |")
+    print("+-------------------------+")
