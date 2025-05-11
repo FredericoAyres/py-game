@@ -66,3 +66,9 @@ def desenhar_gol_estado_3(posicoes):
     print("+-------------------------+")
     print(f"|   {get_val(1):^3}   |  {get_val(2):^3}  |  {get_val(3):^3} |")
     print("+-------------------------+")
+
+def chute_alternadas(numero):
+    dicionario = {1: 0, 2: 0, 3: 0}
+    if numero in dicionario:
+        dicionario[numero] = 1
+    return dicionario
