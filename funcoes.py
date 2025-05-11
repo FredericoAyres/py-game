@@ -26,3 +26,9 @@ def chute(numero):
     if numero in dicionario:
         dicionario[numero] = 1
     return dicionario
+
+def defesa_computador(numero):
+    dicionario = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+    if numero in dicionario:
+        dicionario[numero] = 2
+    return dicionario
