@@ -78,3 +78,13 @@ def defesa_alternadas(numero):
     if numero in dicionario:
         dicionario[numero] = 2
     return dicionario
+
+def soma_dicionarios_alternadas(dicionario1, dicionario2):
+    dicionario = {1: 0, 2: 0, 3: 0}
+    for x in dicionario1:
+        if x in dicionario:
+            dicionario[x] += dicionario1[x]
+    for x in dicionario2:
+        if x in dicionario:
+            dicionario[x] += dicionario2[x]
+    return dicionario
