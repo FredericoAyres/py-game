@@ -1,0 +1,22 @@
+def desenhar_gol_estado(posicoes):
+    """
+    Desenha o gol com base em um dicionário de posições:
+    - 0: posição vazia → mostra o número da posição
+    - 1: chute do jogador ('C')
+    - 2: defesa do goleiro ('G')
+    - 3: ambos no mesmo lugar ('X')
+    """
+    simbolos = {
+        0: None,   # Mostra o número da posição
+        1: 'C',
+        2: 'G',
+        3: 'X'
+    }
+    mapa = {i: simbolos.get(posicoes.get(i, 0), None) for i in range(1, 6)}
+    def get_val(i):
+        return mapa[i] if mapa[i] is not None else str(i)
+    print("+-------------------------+")
+    print(f"|   {get_val(1):^3}   |  {get_val(3):^3}  |  {get_val(4):^3} |")
+    print("|---------+-------+------|")
+    print(f"|   {get_val(2):^3}   |       |  {get_val(5):^3} |")
+    print("+-------------------------+")
