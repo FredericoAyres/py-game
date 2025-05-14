@@ -12,6 +12,16 @@ def jogo_rodando(window):
     image_jogador = pygame.transform.scale(image_jogador,(180, 160))
     image_bola = pygame.image.load('assets/img/Bola_DesSoft.png').convert_alpha()
     image_bola = pygame.transform.scale(image_bola,(50, 50))
+    image_1 = pygame.image.load('assets/img/1_DesSoft.png').convert_alpha()
+    image_1 = pygame.transform.scale(image_1,(400, 400))
+    image_2 = pygame.image.load('assets/img/2_DesSoft.png').convert_alpha()
+    image_2 = pygame.transform.scale(image_2,(400, 400))
+    image_3 = pygame.image.load('assets/img/3_DesSoft.png').convert_alpha()
+    image_3 = pygame.transform.scale(image_3,(400, 400))
+    image_4 = pygame.image.load('assets/img/4_DesSoft.png').convert_alpha()
+    image_4 = pygame.transform.scale(image_4,(400, 400))
+    image_5 = pygame.image.load('assets/img/5_DesSoft.png').convert_alpha()
+    image_5 = pygame.transform.scale(image_5,(400, 400))
 
     while running:
         clock.tick(60)
@@ -26,7 +36,11 @@ def jogo_rodando(window):
         window.blit(image_goleiro, (300, 180))
         window.blit(image_jogador, (220, 450))
         window.blit(image_bola, (375, 470))
-
+        window.blit(image_1, (-80, -30))
+        window.blit(image_2, (-80, 100))
+        window.blit(image_3, (200, -30))
+        window.blit(image_4, (480, -30))
+        window.blit(image_5, (480, 100))
 
         pygame.display.flip()
         pygame.display.update()
