@@ -1,5 +1,5 @@
 import pygame
-from config import INIT, QUIT, GAME
+from config import INIT, QUIT, GAME, GAME_OVER
 
 def tela_inicial(window):
     running = True
