@@ -1,5 +1,8 @@
 import pygame
 import sys
+from config import INIT, QUIT, GAME, GAME_OVER
+from tela_inicial import tela_inicial
+from jogo_rodando import jogo_rodando
 
 # Inicializa o Pygame
 pygame.init()
@@ -11,19 +14,16 @@ pygame.display.set_caption("Jogo de pênaltis")
 
 game = True
 
-font = pygame.font.SysFont(None, 48)
-text = font.render('Vamos para os pênaltis!', True, (255, 255, 255))
+estado = INIT
 
-while game:
-
-    for event in pygame.event.get(): #devolve uma lista de eventos
-
-        if event.type == pygame.QUIT:
-            game = False
-
-    window.fill((0, 0, 0))
-    window.blit(text,(200, 300))
-
-    pygame.display.update()
+while estado != QUIT:
+    if estado == INIT:
+        estado = tela_inicial(window)
+    elif estado == GAME:
+        estado = jogo_rodando(window)
+    elif estado == GAME_OVER:
+        estado = game_over(window)
+    else:
+        estado = QUIT
 
 pygame.quit()
