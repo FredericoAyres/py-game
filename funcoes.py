@@ -88,3 +88,4 @@ def soma_dicionarios_alternadas(dicionario1, dicionario2):
         if x in dicionario:
             dicionario[x] += dicionario2[x]
     return dicionario
+

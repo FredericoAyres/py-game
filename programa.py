@@ -9,7 +9,8 @@ while jogar_novamente == 'sim':
     input()
 
     placar = {'Jogador': 0, 'Computador': 0}
-
+    
+    
     for i in range(5):
 
         dicionario = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}

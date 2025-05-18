@@ -3,7 +3,7 @@ import random
 
 class Bola(pygame.sprite.Sprite):
     def __init__(self, img):
-        # Construtor da classe mãe (Sprite).
+        
         pygame.sprite.Sprite.__init__(self)
 
         self.image = img
@@ -56,7 +56,7 @@ class Bola(pygame.sprite.Sprite):
 
 class Jogador(pygame.sprite.Sprite):
     def __init__(self, img):
-        # Construtor da classe mãe (Sprite).
+       
         pygame.sprite.Sprite.__init__(self)
 
         self.image = img
