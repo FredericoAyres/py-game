@@ -52,6 +52,10 @@ def jogo_rodando(window):
     rodadas_cpu = 0
     max_rodadas = 5
 
+    alternadas = False
+    rodada_alternada = 0
+    alternadas_msg_exibida = False
+
     estado = GAME
 
     while running:
@@ -63,7 +67,7 @@ def jogo_rodando(window):
                 estado = QUIT
 
             if esperando_chute and event.type == pygame.KEYUP:
-                if turno == "chute" and rodadas_jogador < max_rodadas:
+                if turno == "chute" and (rodadas_jogador < max_rodadas or alternadas):
                     jogador_atual = jogador
                     goleiro_atual = goleiro
                     if event.key in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5]:
@@ -75,7 +79,7 @@ def jogo_rodando(window):
                         goleiro_atual.direcao_ultima = goleiro_atual.direcao
                         esperando_chute = False
 
-                elif turno == "defesa" and rodadas_cpu < max_rodadas:
+                elif turno == "defesa" and (rodadas_cpu < max_rodadas or alternadas):
                     jogador_atual = jogador2
                     goleiro_atual = goleiro2
                     if event.key in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5]:
@@ -118,16 +122,49 @@ def jogo_rodando(window):
             pygame.display.flip()
             pygame.time.wait(2000)
 
-            if turno == "chute":
-                rodadas_jogador += 1
-                turno = "defesa"
-                jogador_atual = jogador2
-                goleiro_atual = goleiro2
+            if not alternadas:
+                if turno == "chute":
+                    rodadas_jogador += 1
+                    turno = "defesa"
+                    jogador_atual = jogador2
+                    goleiro_atual = goleiro2
+                else:
+                    rodadas_cpu += 1
+                    turno = "chute"
+                    jogador_atual = jogador
+                    goleiro_atual = goleiro
+
+                if rodadas_jogador >= max_rodadas and rodadas_cpu >= max_rodadas:
+                    if placar_jogador == placar_cpu:
+                        alternadas = True
+                        rodada_alternada = 1
+                        if not alternadas_msg_exibida:
+                            msg = font.render("Empate! Vamos para as alternadas!", True, (255, 255, 0))
+                            msg_rect = msg.get_rect(center=(400, 360))
+                            window.blit(msg, msg_rect)
+                            pygame.display.flip()
+                            pygame.time.wait(2500)
+                            alternadas_msg_exibida = True
+                    else:
+                        pygame.time.wait(2000)
+                        estado = GAME_OVER
+                        return estado
             else:
-                rodadas_cpu += 1
-                turno = "chute"
-                jogador_atual = jogador
-                goleiro_atual = goleiro
+                if turno == "chute":
+                    turno = "defesa"
+                    jogador_atual = jogador2
+                    goleiro_atual = goleiro2
+                else:
+                    if placar_jogador > placar_cpu:
+                        pygame.time.wait(2000)
+                        return GAME_OVER
+                    elif placar_cpu > placar_jogador:
+                        pygame.time.wait(2000)
+                        return GAME_OVER
+                    rodada_alternada += 1
+                    turno = "chute"
+                    jogador_atual = jogador
+                    goleiro_atual = goleiro
 
             esperando_chute = True
             jogador_atual.rect.x = 220
@@ -136,11 +173,6 @@ def jogo_rodando(window):
             goleiro_atual.rect.y = 220
             bola.rect.x = 375
             bola.rect.y = 470
-
-        if rodadas_jogador >= max_rodadas and rodadas_cpu >= max_rodadas:
-            pygame.time.wait(2000)
-            estado = GAME_OVER
-            return estado
 
         if turno == "chute":
             text = font.render('Sua vez de chutar!', True, (255, 255, 255))
