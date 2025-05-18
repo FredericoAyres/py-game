@@ -7,6 +7,7 @@ def jogo_rodando(window):
     running = True
     clock = pygame.time.Clock()
 
+    # Carregando imagens
     image_fundo = pygame.image.load('assets/img/Gol_DesSoft.png').convert_alpha()
     image_fundo = pygame.transform.scale(image_fundo, (800, 600))
     image_goleiro = pygame.image.load('assets/img/Goleiro_DesSoft.png').convert_alpha()
@@ -32,6 +33,7 @@ def jogo_rodando(window):
 
     font = pygame.font.SysFont(None, 48)
 
+    # Instanciando sprites
     goleiro = Goleiro(image_goleiro)
     jogador = Jogador(image_jogador)
     bola = Bola(image_bola)
@@ -47,6 +49,10 @@ def jogo_rodando(window):
     turno = "chute"
     esperando_chute = True
 
+    rodadas_jogador = 0
+    rodadas_cpu = 0
+    max_rodadas = 5
+
     while running:
         clock.tick(60)
 
@@ -56,7 +62,7 @@ def jogo_rodando(window):
                 estado = QUIT
 
             if esperando_chute and event.type == pygame.KEYUP:
-                if turno == "chute":
+                if turno == "chute" and rodadas_jogador < max_rodadas:
                     jogador_atual = jogador
                     goleiro_atual = goleiro
                     if event.key in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5]:
@@ -68,7 +74,7 @@ def jogo_rodando(window):
                         goleiro_atual.direcao_ultima = goleiro_atual.direcao
                         esperando_chute = False
 
-                elif turno == "defesa":
+                elif turno == "defesa" and rodadas_cpu < max_rodadas:
                     jogador_atual = jogador2
                     goleiro_atual = goleiro2
                     if event.key in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5]:
@@ -94,10 +100,12 @@ def jogo_rodando(window):
                     placar_cpu += 1
 
             if turno == "chute":
+                rodadas_jogador += 1
                 turno = "defesa"
                 jogador_atual = jogador2
                 goleiro_atual = goleiro2
             else:
+                rodadas_cpu += 1
                 turno = "chute"
                 jogador_atual = jogador
                 goleiro_atual = goleiro
@@ -109,6 +117,11 @@ def jogo_rodando(window):
             goleiro_atual.rect.y = 220
             bola.rect.x = 375
             bola.rect.y = 470
+
+        if rodadas_jogador >= max_rodadas and rodadas_cpu >= max_rodadas:
+            pygame.time.wait(2000)
+            estado = GAME_OVER
+            return estado
 
         if turno == "chute":
             text = font.render('Sua vez de chutar!', True, (255, 255, 255))
