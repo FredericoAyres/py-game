@@ -8,27 +8,27 @@ def jogo_rodando(window):
     clock = pygame.time.Clock()
 
     image_fundo = pygame.image.load('assets/img/Gol_DesSoft.png').convert_alpha()
-    image_fundo = pygame.transform.scale(image_fundo,(800, 600))
+    image_fundo = pygame.transform.scale(image_fundo, (800, 600))
     image_goleiro = pygame.image.load('assets/img/Goleiro_DesSoft.png').convert_alpha()
-    image_goleiro = pygame.transform.scale(image_goleiro,(160, 135))
+    image_goleiro = pygame.transform.scale(image_goleiro, (160, 135))
     image_goleiro2 = pygame.image.load('assets/img/Goleiro2_DesSoft.png').convert_alpha()
-    image_goleiro2 = pygame.transform.scale(image_goleiro2,(160, 135))
+    image_goleiro2 = pygame.transform.scale(image_goleiro2, (160, 135))
     image_jogador = pygame.image.load('assets/img/Jogador_DesSoft.png').convert_alpha()
-    image_jogador = pygame.transform.scale(image_jogador,(180, 160))
+    image_jogador = pygame.transform.scale(image_jogador, (180, 160))
     image_jogador2 = pygame.image.load('assets/img/Jogador2_DesSoft.png').convert_alpha()
-    image_jogador2 = pygame.transform.scale(image_jogador2,(180, 160))
+    image_jogador2 = pygame.transform.scale(image_jogador2, (180, 160))
     image_bola = pygame.image.load('assets/img/Bola_DesSoft.png').convert_alpha()
-    image_bola = pygame.transform.scale(image_bola,(50, 50))
+    image_bola = pygame.transform.scale(image_bola, (50, 50))
     image_1 = pygame.image.load('assets/img/1_DesSoft.png').convert_alpha()
-    image_1 = pygame.transform.scale(image_1,(400, 400))
+    image_1 = pygame.transform.scale(image_1, (400, 400))
     image_2 = pygame.image.load('assets/img/2_DesSoft.png').convert_alpha()
-    image_2 = pygame.transform.scale(image_2,(400, 400))
+    image_2 = pygame.transform.scale(image_2, (400, 400))
     image_3 = pygame.image.load('assets/img/3_DesSoft.png').convert_alpha()
-    image_3 = pygame.transform.scale(image_3,(400, 400))
+    image_3 = pygame.transform.scale(image_3, (400, 400))
     image_4 = pygame.image.load('assets/img/4_DesSoft.png').convert_alpha()
-    image_4 = pygame.transform.scale(image_4,(400, 400))
+    image_4 = pygame.transform.scale(image_4, (400, 400))
     image_5 = pygame.image.load('assets/img/5_DesSoft.png').convert_alpha()
-    image_5 = pygame.transform.scale(image_5,(400, 400))
+    image_5 = pygame.transform.scale(image_5, (400, 400))
 
     font = pygame.font.SysFont(None, 48)
 
@@ -40,6 +40,9 @@ def jogo_rodando(window):
 
     jogador_atual = jogador
     goleiro_atual = goleiro
+
+    placar_jogador = 0
+    placar_cpu = 0
 
     turno = "chute"
     esperando_chute = True
@@ -56,67 +59,40 @@ def jogo_rodando(window):
                 if turno == "chute":
                     jogador_atual = jogador
                     goleiro_atual = goleiro
-                    if event.key == pygame.K_1:
-                        jogador_atual.direcao = 1
-                        bola.direcao = 1
+                    if event.key in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5]:
+                        direcao = int(event.key - pygame.K_0)
+                        jogador_atual.direcao = direcao
+                        bola.direcao = direcao
+                        bola.ultima_direcao = direcao
                         goleiro_atual.direcao = random.randint(1, 5)
-                        esperando_chute = False
-                    elif event.key == pygame.K_2:
-                        jogador_atual.direcao = 2
-                        bola.direcao = 2
-                        goleiro_atual.direcao = random.randint(1, 5)
-                        esperando_chute = False
-                    elif event.key == pygame.K_3:
-                        jogador_atual.direcao = 3
-                        bola.direcao = 3
-                        goleiro_atual.direcao = random.randint(1, 5)
-                        esperando_chute = False
-                    elif event.key == pygame.K_4:
-                        jogador_atual.direcao = 4
-                        bola.direcao = 4
-                        goleiro_atual.direcao = random.randint(1, 5)
-                        esperando_chute = False
-                    elif event.key == pygame.K_5:
-                        jogador_atual.direcao = 5
-                        bola.direcao = 5
-                        goleiro_atual.direcao = random.randint(1, 5)
+                        goleiro_atual.direcao_ultima = goleiro_atual.direcao
                         esperando_chute = False
 
                 elif turno == "defesa":
                     jogador_atual = jogador2
                     goleiro_atual = goleiro2
-                    if event.key == pygame.K_1:
-                        goleiro_atual.direcao = 1
+                    if event.key in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5]:
+                        direcao = int(event.key - pygame.K_0)
+                        goleiro_atual.direcao = direcao
+                        goleiro_atual.direcao_ultima = direcao
                         jogador_atual.direcao = 3
                         bola.direcao = random.randint(1, 5)
+                        bola.ultima_direcao = bola.direcao
                         esperando_chute = False
-                    elif event.key == pygame.K_2:
-                        goleiro_atual.direcao = 2
-                        jogador_atual.direcao = 3
-                        bola.direcao = random.randint(1, 5)
-                        esperando_chute = False
-                    elif event.key == pygame.K_3:
-                        goleiro_atual.direcao = 3
-                        jogador_atual.direcao = 3
-                        bola.direcao = random.randint(1, 5)
-                        esperando_chute = False
-                    elif event.key == pygame.K_4:
-                        goleiro_atual.direcao = 4
-                        jogador_atual.direcao = 3
-                        bola.direcao = random.randint(1, 5)
-                        esperando_chute = False
-                    elif event.key == pygame.K_5:
-                        goleiro_atual.direcao = 5
-                        jogador_atual.direcao = 3
-                        bola.direcao = random.randint(1, 5)
-                        esperando_chute = False
-                        
+
         goleiro_atual.update()
         jogador_atual.update()
         bola.update()
 
         if bola.direcao == 0 and jogador_atual.direcao == 0 and goleiro_atual.direcao == 0 and not esperando_chute:
-            pygame.time.wait(3000)
+            pygame.time.wait(1000)
+
+            if bola.ultima_direcao != goleiro_atual.direcao_ultima:
+                if turno == "chute":
+                    placar_jogador += 1
+                else:
+                    placar_cpu += 1
+
             if turno == "chute":
                 turno = "defesa"
                 jogador_atual = jogador2
@@ -125,8 +101,8 @@ def jogo_rodando(window):
                 turno = "chute"
                 jogador_atual = jogador
                 goleiro_atual = goleiro
-            esperando_chute = True
 
+            esperando_chute = True
             jogador_atual.rect.x = 220
             jogador_atual.rect.y = 450
             goleiro_atual.rect.x = 315
@@ -148,7 +124,10 @@ def jogo_rodando(window):
         window.blit(image_3, (200, -30))
         window.blit(image_4, (480, -30))
         window.blit(image_5, (480, 100))
-        window.blit(text,(10, 10))
+
+        placar_texto = font.render(f"Jog: {placar_jogador}  -  {placar_cpu} :CPU", True, (255, 255, 255))
+        window.blit(placar_texto, (10, 10))
+        window.blit(text, (10, 70))
 
         pygame.display.flip()
         pygame.display.update()
