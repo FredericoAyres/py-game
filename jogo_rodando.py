@@ -7,7 +7,6 @@ def jogo_rodando(window):
     running = True
     clock = pygame.time.Clock()
 
-    # Carregando imagens
     image_fundo = pygame.image.load('assets/img/Gol_DesSoft.png').convert_alpha()
     image_fundo = pygame.transform.scale(image_fundo, (800, 600))
     image_goleiro = pygame.image.load('assets/img/Goleiro_DesSoft.png').convert_alpha()
@@ -32,8 +31,8 @@ def jogo_rodando(window):
     image_5 = pygame.transform.scale(image_5, (400, 400))
 
     font = pygame.font.SysFont(None, 48)
+    font_resultado = pygame.font.SysFont(None, 96)
 
-    # Instanciando sprites
     goleiro = Goleiro(image_goleiro)
     jogador = Jogador(image_jogador)
     bola = Bola(image_bola)
@@ -52,6 +51,8 @@ def jogo_rodando(window):
     rodadas_jogador = 0
     rodadas_cpu = 0
     max_rodadas = 5
+
+    estado = GAME
 
     while running:
         clock.tick(60)
@@ -91,13 +92,31 @@ def jogo_rodando(window):
         bola.update()
 
         if bola.direcao == 0 and jogador_atual.direcao == 0 and goleiro_atual.direcao == 0 and not esperando_chute:
-            pygame.time.wait(1000)
+            resultado = "GOL!" if bola.ultima_direcao != goleiro_atual.direcao_ultima else "DEFESA!"
 
-            if bola.ultima_direcao != goleiro_atual.direcao_ultima:
+            if resultado == "GOL!":
                 if turno == "chute":
                     placar_jogador += 1
                 else:
                     placar_cpu += 1
+
+            resultado_text = font_resultado.render(resultado, True, (255, 255, 0))
+            resultado_rect = resultado_text.get_rect(center=(400, 300))
+
+            window.blit(image_fundo, (0, 0))
+            window.blit(goleiro_atual.image, (goleiro_atual.rect.x, goleiro_atual.rect.y))
+            window.blit(jogador_atual.image, (jogador_atual.rect.x, jogador_atual.rect.y))
+            window.blit(bola.image, (bola.rect.x, bola.rect.y))
+            window.blit(image_1, (-80, -30))
+            window.blit(image_2, (-80, 100))
+            window.blit(image_3, (200, -30))
+            window.blit(image_4, (480, -30))
+            window.blit(image_5, (480, 100))
+            placar_texto = font.render(f"Jog: {placar_jogador}  -  {placar_cpu} :CPU", True, (255, 255, 255))
+            window.blit(placar_texto, (10, 10))
+            window.blit(resultado_text, resultado_rect)
+            pygame.display.flip()
+            pygame.time.wait(2000)
 
             if turno == "chute":
                 rodadas_jogador += 1
@@ -143,6 +162,5 @@ def jogo_rodando(window):
         window.blit(text, (10, 70))
 
         pygame.display.flip()
-        pygame.display.update()
 
     return estado
