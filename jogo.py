@@ -3,6 +3,7 @@ import sys
 from config import INIT, QUIT, GAME, GAME_OVER
 from tela_inicial import tela_inicial
 from jogo_rodando import jogo_rodando
+from game_over import game_over
 
 # Inicializa o Pygame
 pygame.init()
