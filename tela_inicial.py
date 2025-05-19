@@ -4,8 +4,8 @@ from config import INIT, QUIT, GAME, GAME_OVER
 def tela_inicial(window):
     running = True
     clock = pygame.time.Clock()
-    font = pygame.font.SysFont(None, 48)
-    text = font.render('Vamos para os pênaltis!', True, (255, 255, 255))
+    image_menu = pygame.image.load('assets/img/menu_jogo.jpg').convert_alpha()
+    image_menu = pygame.transform.scale(image_menu, (800, 600))
     while running:
         clock.tick(60)
 
@@ -19,10 +19,8 @@ def tela_inicial(window):
                 running = False
                 estado = GAME
 
-        window.fill((0, 0, 0))
-        window.blit(text,(200, 300))
+        window.blit(image_menu,(0, 0))
 
-        pygame.display.flip()
         pygame.display.update()
 
     return estado
