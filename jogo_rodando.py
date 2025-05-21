@@ -56,7 +56,7 @@ def jogo_rodando(window):
     rodada_alternada = 0
     alternadas_msg_exibida = False
 
-    estado = GAME
+    estado = GAME_OVER
 
     while running:
         clock.tick(60)
@@ -193,8 +193,6 @@ def jogo_rodando(window):
         window.blit(text, (10, 70))
 
         pygame.display.flip()
-
-        estado = GAME_OVER
 
     if placar_jogador > placar_cpu:
         return estado, "ganhou"

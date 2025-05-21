@@ -13,13 +13,16 @@ def game_over(window, resultado):
 
     estado = GAME_OVER
 
-    font_resultado = pygame.font.SysFont(None, 60)
+    font_resultado = pygame.font.SysFont(None, 50)
     if resultado == "ganhou":
         mensagem = "VOCÊ GANHOU!" 
     else:
         mensagem = "VOCÊ PERDEU!"
     texto = font_resultado.render(mensagem, True, (255, 255, 0))
-    rect = texto.get_rect(center=(387, 290))
+    rect = texto.get_rect(center=(380, 290))
+
+    pygame.mixer.music.load('musicas/fox_sports.mp3')
+    pygame.mixer.music.play(loops=-1)
 
     while running:
         clock.tick(60)
