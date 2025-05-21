@@ -1,3 +1,4 @@
+# Esse arquvo é inútil para o jogo portanto não precisa ser comentado
 from funcoes import desenhar_gol_estado, chute, defesa, soma_dicionarios, desenhar_gol_estado_3, chute_alternadas, defesa_alternadas, soma_dicionarios_alternadas
 import random
 
