@@ -21,9 +21,9 @@ while estado != QUIT:
     if estado == INIT:
         estado = tela_inicial(window)
     elif estado == GAME:
-        estado = jogo_rodando(window)
+        estado, resultado = jogo_rodando(window)
     elif estado == GAME_OVER:
-        estado = game_over(window)
+        estado = game_over(window, resultado)
     else:
         estado = QUIT
 

@@ -143,12 +143,11 @@ def jogo_rodando(window):
                             msg_rect = msg.get_rect(center=(400, 360))
                             window.blit(msg, msg_rect)
                             pygame.display.flip()
-                            pygame.time.wait(2500)
+                            pygame.time.wait(2000)
                             alternadas_msg_exibida = True
                     else:
                         pygame.time.wait(2000)
-                        estado = GAME_OVER
-                        return estado
+                        running = False
             else:
                 if turno == "chute":
                     turno = "defesa"
@@ -157,10 +156,10 @@ def jogo_rodando(window):
                 else:
                     if placar_jogador > placar_cpu:
                         pygame.time.wait(2000)
-                        return GAME_OVER
+                        running = False
                     elif placar_cpu > placar_jogador:
                         pygame.time.wait(2000)
-                        return GAME_OVER
+                        running = False
                     rodada_alternada += 1
                     turno = "chute"
                     jogador_atual = jogador
@@ -195,4 +194,9 @@ def jogo_rodando(window):
 
         pygame.display.flip()
 
-    return estado
+        estado = GAME_OVER
+
+    if placar_jogador > placar_cpu:
+        return estado, "ganhou"
+    else:
+        return estado, "perdeu"
