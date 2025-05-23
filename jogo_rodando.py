@@ -6,6 +6,26 @@ from classes import Bola, Jogador, Goleiro
 
 # Função principal do jogo, onde ocorre a lógica do gameplay
 def jogo_rodando(window):
+
+    """
+    Executa a lógica principal do jogo de pênaltis.
+
+    Esta função faz toda a dinâmica do jogo, incluindo carregamento de recursos gráficos,
+    inicialização dos objetos do jogo (jogador, goleiro, bola), controle de eventos do teclado,
+    alternância de turnos entre chute e defesa, atualização de placar, e verificação de condições 
+    de vitória ou empate. O jogo inclui uma disputa de pênaltis tradicional e, em caso de empate, 
+    uma disputa alternada até definição de vencedor.
+
+    Args:
+        window: A superfície onde todos os elementos gráficos do jogo serão desenhados.
+
+    Retorna:
+                O estado final do jogo, sendo GAME_OVER ou QUIT.
+                O resultado do jogo, podendo ser:
+                - "ganhou": se o jogador venceu a disputa.
+                - "perdeu": se o jogador perdeu a disputa.
+    """
+
     # Inicia a variável de controle do loop
     running = True
     # Cria um relógio para controlar o fps

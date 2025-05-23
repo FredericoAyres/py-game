@@ -4,6 +4,26 @@ from config import INIT, QUIT, GAME_OVER
 
 # Função que exibe a tela de game over
 def game_over(window, resultado):
+
+    """
+    Exibe a tela de game over e gerencia a decisão do jogador de reiniciar ou sair do jogo.
+
+    Esta função carrega a tela de game over, exibe uma mensagem indicando se o jogador ganhou 
+    ou perdeu, e apresenta dois botões: "Sim" para reiniciar o jogo e "Não" para encerrar. 
+    O usuário pode clicar em uma dessas opções ou fechar a janela para sair.
+
+    Recebe:
+        window: A superfície onde a tela de game over será desenhada.
+        resultado: Resultado da partida, podendo ser:
+            - "ganhou": indica vitória.
+            - "perdeu": indica derrota.
+
+    Retorna:
+            O próximo estado do jogo, podendo ser:
+            - INIT: se o jogador optar por reiniciar o jogo.
+            - QUIT: se o jogador decidir encerrar o jogo ou fechar a janela.
+    """
+
     # Variável de controle do loop da tela
     running = True
     # Relógio para controlar o intervalo entre frames

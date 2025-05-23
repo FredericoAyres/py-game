@@ -4,6 +4,26 @@ from config import INIT, QUIT, GAME, GAME_OVER, TELA_INFORMACOES
 
 # Função que representa a tela inicial do jogo
 def tela_inicial(window):
+
+    """
+    Exibe a tela inicial do jogo e gerencia a interação do usuário.
+
+    Esta função carrega a imagem de fundo do menu, inicializa o mixer de áudio e
+    cria os botões correspondentes aos times disponíveis. O usuário pode escolher
+    um time clicando em um dos escudos, acionando a reprodução da música do time 
+    e alterando o estado do jogo para GAME. Também é possível acessar a tela de
+    informações ou encerrar o jogo.
+
+    Recebe:
+        window: A superfície onde a tela inicial será desenhada.
+
+    Retorna:
+            O novo estado do jogo, podendo ser:
+            - QUIT: se o usuário fechar a janela.
+            - GAME: se o usuário selecionar um time.
+            - TELA_INFORMACOES: se o usuário clicar no botão de informações.
+    """
+
     running = True
     clock = pygame.time.Clock()
 
@@ -58,10 +78,12 @@ def tela_inicial(window):
         clock.tick(60)
 
         for event in pygame.event.get():
+            # Verifica se foi clicado para sair do jogo
             if event.type == pygame.QUIT:
                 running = False
                 estado = QUIT
 
+            # Verifica se foi clicado algo com o mouse
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
 
