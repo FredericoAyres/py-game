@@ -1,12 +1,17 @@
+# Importa módulos necessários e estados do jogo
 import pygame
 import random
 from config import INIT, QUIT, GAME, GAME_OVER
 from classes import Bola, Jogador, Goleiro
 
+# Função principal do jogo, onde ocorre a lógica do gameplay
 def jogo_rodando(window):
+    # Inicia a variável de controle do loop
     running = True
+    # Cria um relógio para controlar o fps
     clock = pygame.time.Clock()
 
+    # Carrega e redimensiona todas as imagens do jogo
     image_fundo = pygame.image.load('assets/img/Gol_DesSoft.png').convert_alpha()
     image_fundo = pygame.transform.scale(image_fundo, (800, 600))
     image_goleiro = pygame.image.load('assets/img/Goleiro_DesSoft.png').convert_alpha()
@@ -30,44 +35,57 @@ def jogo_rodando(window):
     image_5 = pygame.image.load('assets/img/5_DesSoft.png').convert_alpha()
     image_5 = pygame.transform.scale(image_5, (400, 400))
 
+    # Define as fontes para textos
     font = pygame.font.SysFont(None, 48)
     font_resultado = pygame.font.SysFont(None, 96)
 
+    # Cria instâncias dos personagens e da bola
     goleiro = Goleiro(image_goleiro)
     jogador = Jogador(image_jogador)
     bola = Bola(image_bola)
     goleiro2 = Goleiro(image_goleiro2)
     jogador2 = Jogador(image_jogador2)
 
+    # Define quem está jogando no momento
     jogador_atual = jogador
     goleiro_atual = goleiro
 
+    # Placar inicial
     placar_jogador = 0
     placar_cpu = 0
 
+    # Define turno inicial (chute)
     turno = "chute"
     esperando_chute = True
 
+    # Contadores de rodadas
     rodadas_jogador = 0
     rodadas_cpu = 0
     max_rodadas = 5
 
+    # Controle de disputa alternada em caso de empate
     alternadas = False
     rodada_alternada = 0
     alternadas_msg_exibida = False
 
+    # Estado padrão de retorno ao final do jogo
     estado = GAME_OVER
 
+    # Loop principal do jogo
     while running:
+        # Controla o fps
         clock.tick(60)
 
+        # Verifica eventos de teclado e janela
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
                 estado = QUIT
 
+            # Aguarda o chute/defesa do jogador
             if esperando_chute and event.type == pygame.KEYUP:
                 if turno == "chute" and (rodadas_jogador < max_rodadas or alternadas):
+                    # Jogador escolhe onde vai ser o chute
                     jogador_atual = jogador
                     goleiro_atual = goleiro
                     if event.key in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5]:
@@ -80,6 +98,7 @@ def jogo_rodando(window):
                         esperando_chute = False
 
                 elif turno == "defesa" and (rodadas_cpu < max_rodadas or alternadas):
+                    # Jogador escolhe onde vai defender
                     jogador_atual = jogador2
                     goleiro_atual = goleiro2
                     if event.key in [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5]:
@@ -91,22 +110,28 @@ def jogo_rodando(window):
                         bola.ultima_direcao = bola.direcao
                         esperando_chute = False
 
+        # Atualiza posições dos objetos
         goleiro_atual.update()
         jogador_atual.update()
         bola.update()
 
+        # Quando a animação do chute termina
         if bola.direcao == 0 and jogador_atual.direcao == 0 and goleiro_atual.direcao == 0 and not esperando_chute:
+            # Verifica o resultado do chute
             resultado = "GOL!" if bola.ultima_direcao != goleiro_atual.direcao_ultima else "DEFESA!"
 
+            # Atualiza placar de acordo com o resultado
             if resultado == "GOL!":
                 if turno == "chute":
                     placar_jogador += 1
                 else:
                     placar_cpu += 1
 
+            # Exibe resultado na tela por 2 segundos
             resultado_text = font_resultado.render(resultado, True, (255, 255, 0))
             resultado_rect = resultado_text.get_rect(center=(400, 300))
 
+            # Desenha elementos do jogo na tela
             window.blit(image_fundo, (0, 0))
             window.blit(goleiro_atual.image, (goleiro_atual.rect.x, goleiro_atual.rect.y))
             window.blit(jogador_atual.image, (jogador_atual.rect.x, jogador_atual.rect.y))
@@ -122,6 +147,7 @@ def jogo_rodando(window):
             pygame.display.flip()
             pygame.time.wait(2000)
 
+            # Alterna turno ou verifica fim do jogo
             if not alternadas:
                 if turno == "chute":
                     rodadas_jogador += 1
@@ -134,6 +160,7 @@ def jogo_rodando(window):
                     jogador_atual = jogador
                     goleiro_atual = goleiro
 
+                # Se rodadas acabaram, verifica empate ou vitória
                 if rodadas_jogador >= max_rodadas and rodadas_cpu >= max_rodadas:
                     if placar_jogador == placar_cpu:
                         alternadas = True
@@ -149,6 +176,7 @@ def jogo_rodando(window):
                         pygame.time.wait(2000)
                         running = False
             else:
+                # Disputa por pênaltis alternadas
                 if turno == "chute":
                     turno = "defesa"
                     jogador_atual = jogador2
@@ -165,6 +193,7 @@ def jogo_rodando(window):
                     jogador_atual = jogador
                     goleiro_atual = goleiro
 
+            # Prepara para próximo chute
             esperando_chute = True
             jogador_atual.rect.x = 220
             jogador_atual.rect.y = 450
@@ -173,11 +202,13 @@ def jogo_rodando(window):
             bola.rect.x = 375
             bola.rect.y = 470
 
+        # Mostra texto de turno atual
         if turno == "chute":
             text = font.render('Sua vez de chutar!', True, (255, 255, 255))
         else:
             text = font.render('Sua vez de defender!', True, (255, 255, 255))
 
+        # Redesenha a tela
         window.blit(image_fundo, (0, 0))
         window.blit(goleiro_atual.image, (goleiro_atual.rect.x, goleiro_atual.rect.y))
         window.blit(jogador_atual.image, (jogador_atual.rect.x, jogador_atual.rect.y))
@@ -192,8 +223,10 @@ def jogo_rodando(window):
         window.blit(placar_texto, (10, 10))
         window.blit(text, (10, 70))
 
+        # Atualiza a tela
         pygame.display.flip()
 
+    # Retorna o resultado final ao final do jogo
     if placar_jogador > placar_cpu:
         return estado, "ganhou"
     else:
