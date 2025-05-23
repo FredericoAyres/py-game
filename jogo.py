@@ -1,10 +1,11 @@
 # Importa os módulos necessários
 import pygame
 import sys
-from config import INIT, QUIT, GAME, GAME_OVER
+from config import INIT, QUIT, GAME, GAME_OVER,TELA_INFORMACOES
 from tela_inicial import tela_inicial
 from jogo_rodando import jogo_rodando
 from game_over import game_over
+from tela_informacoes import tela_informacoes
 
 # Inicializa o Pygame
 pygame.init()
@@ -31,6 +32,9 @@ while estado != QUIT:
     # Se o estado for GAME_OVER exibe a tela de game over com base no resultado
     elif estado == GAME_OVER:
         estado = game_over(window, resultado)
+    # Se o estado for TELA_INFORMACOES exibe a tela de informacoes
+    elif estado == TELA_INFORMACOES:
+        estado = tela_informacoes(window)
     # Caso não seja nenhuma das opções acima encerra o jogo
     else:
         estado = QUIT
