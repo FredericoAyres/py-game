@@ -54,16 +54,39 @@ def jogo_rodando(window):
     image_4 = pygame.transform.scale(image_4, (400, 400))
     image_5 = pygame.image.load('assets/img/5_DesSoft.png').convert_alpha()
     image_5 = pygame.transform.scale(image_5, (400, 400))
+    image_goleiro1_direita = pygame.image.load('assets/img/Goleiro_direita_DesSoft.png').convert_alpha()
+    image_goleiro1_direita = pygame.transform.scale(image_goleiro1_direita, (160, 135))
+    image_goleiro1_esquerda = pygame.image.load('assets/img/Goleiro_esquerda_DesSoft.png').convert_alpha()
+    image_goleiro1_esquerda = pygame.transform.scale(image_goleiro1_esquerda, (160, 135))
+    image_goleiro2_direita = pygame.image.load('assets/img/Goleiro2_direita_DesSoft.png').convert_alpha()
+    image_goleiro2_direita = pygame.transform.scale(image_goleiro2_direita, (160, 135))
+    image_goleiro2_esquerda = pygame.image.load('assets/img/Goleiro2_esquerda_DesSoft.png').convert_alpha()
+    image_goleiro2_esquerda = pygame.transform.scale(image_goleiro2_esquerda, (160, 135))
 
+    sprites_goleiro1 = {
+        1: image_goleiro1_esquerda,
+        2: image_goleiro1_esquerda,  
+        3: image_goleiro,
+        4: image_goleiro1_direita,
+        5: image_goleiro1_direita
+    }
+
+    sprites_goleiro2 = {
+        1: image_goleiro2_esquerda,
+        2: image_goleiro2_esquerda,  
+        3: image_goleiro2,
+        4: image_goleiro2_direita,
+        5: image_goleiro2_direita
+    }
     # Define as fontes para textos
     font = pygame.font.SysFont(None, 48)
     font_resultado = pygame.font.SysFont(None, 96)
 
     # Cria instâncias dos personagens e da bola
-    goleiro = Goleiro(image_goleiro)
+    goleiro = Goleiro(image_goleiro, sprites_goleiro1)
     jogador = Jogador(image_jogador)
     bola = Bola(image_bola)
-    goleiro2 = Goleiro(image_goleiro2)
+    goleiro2 = Goleiro(image_goleiro2, sprites_goleiro2)
     jogador2 = Jogador(image_jogador2)
 
     # Define quem está jogando no momento
@@ -115,6 +138,8 @@ def jogo_rodando(window):
                         bola.ultima_direcao = direcao
                         goleiro_atual.direcao = random.randint(1, 5)
                         goleiro_atual.direcao_ultima = goleiro_atual.direcao
+                        goleiro_atual.image = sprites_goleiro1[goleiro.direcao]
+                        window.blit(goleiro_atual.image, (goleiro_atual.rect.x, goleiro_atual.rect.y))
                         esperando_chute = False
 
                 elif turno == "defesa" and (rodadas_cpu < max_rodadas or alternadas):
@@ -125,6 +150,8 @@ def jogo_rodando(window):
                         direcao = int(event.key - pygame.K_0)
                         goleiro_atual.direcao = direcao
                         goleiro_atual.direcao_ultima = direcao
+                        goleiro_atual.image = sprites_goleiro2[goleiro2.direcao]
+                        window.blit(goleiro_atual.image, (goleiro_atual.rect.x, goleiro_atual.rect.y))
                         jogador_atual.direcao = 3
                         bola.direcao = random.randint(1, 5)
                         bola.ultima_direcao = bola.direcao
@@ -228,6 +255,10 @@ def jogo_rodando(window):
         else:
             text = font.render('Sua vez de defender!', True, (255, 255, 255))
 
+        if goleiro_atual == goleiro and goleiro.direcao == 0 and goleiro.rect.x == 315 and goleiro.rect.y == 220:
+            goleiro.image = sprites_goleiro1[3]
+        elif goleiro_atual == goleiro2 and goleiro2.direcao == 0 and goleiro2.rect.x == 315 and goleiro2.rect.y == 220:
+            goleiro2.image = sprites_goleiro2[3]
         # Redesenha a tela
         window.blit(image_fundo, (0, 0))
         window.blit(goleiro_atual.image, (goleiro_atual.rect.x, goleiro_atual.rect.y))

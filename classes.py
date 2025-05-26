@@ -80,7 +80,7 @@ class Jogador(pygame.sprite.Sprite):
 
 
 class Goleiro(pygame.sprite.Sprite):
-    def __init__(self, img):
+    def __init__(self, img, dic_sprites):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
@@ -91,11 +91,13 @@ class Goleiro(pygame.sprite.Sprite):
         self.speedx = 0
         self.speedy = 0
         self.direcao = 0
-
+        self.dic = dic_sprites
+        
     def update(self):
         if self.direcao == 1:
             self.speedx = -205/60
             self.speedy = -35/60
+            self.image = self.dic[1]
             if self.rect.x < 40:
                 self.speedx = 0
                 self.speedy = 0
@@ -103,6 +105,7 @@ class Goleiro(pygame.sprite.Sprite):
         if self.direcao == 2:
             self.speedx = -205/60
             self.speedy = 0
+            self.image = self.dic[2]
             if self.rect.x < 40:
                 self.speedx = 0
                 self.speedy = 0
@@ -110,6 +113,7 @@ class Goleiro(pygame.sprite.Sprite):
         if self.direcao == 3:
             self.speedx = 0
             self.speedy = -35/60
+            self.image = self.dic[3]
             if self.rect.y < 125:
                 self.speedx = 0
                 self.speedy = 0
@@ -117,6 +121,7 @@ class Goleiro(pygame.sprite.Sprite):
         if self.direcao == 4:
             self.speedx = 360/60
             self.speedy = -100/60
+            self.image = self.dic[4]
             if self.rect.x > 590:
                 self.speedx = 0
                 self.speedy = 0
@@ -124,6 +129,7 @@ class Goleiro(pygame.sprite.Sprite):
         if self.direcao == 5:
             self.speedx = 360/60
             self.speedy = 0
+            self.image = self.dic[5]
             if self.rect.x > 590:
                 self.speedx = 0
                 self.speedy = 0
