@@ -1,6 +1,6 @@
 # Importa o módulo pygame e as constantes de estado do jogo
 import pygame
-from config import INIT, QUIT, GAME, GAME_OVER, TELA_INFORMACOES
+from config import QUIT, GAME, TELA_INFORMACOES
 from assets import *
 
 # Função que representa a tela inicial do jogo

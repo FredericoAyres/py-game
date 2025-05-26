@@ -1,6 +1,5 @@
 # Importa os módulos necessários
 import pygame
-import sys
 from config import INIT, QUIT, GAME, GAME_OVER,TELA_INFORMACOES
 from tela_inicial import tela_inicial
 from jogo_rodando import jogo_rodando

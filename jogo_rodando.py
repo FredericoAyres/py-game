@@ -1,7 +1,7 @@
 # Importa módulos necessários e estados do jogo
 import pygame
 import random
-from config import INIT, QUIT, GAME, GAME_OVER
+from config import QUIT, GAME_OVER
 from classes import Bola, Jogador, Goleiro
 from assets import *
 
@@ -32,6 +32,7 @@ def jogo_rodando(window):
     # Cria um relógio para controlar o fps
     clock = pygame.time.Clock()
 
+    # Cria os Sprites da animação do goleiro1 
     sprites_goleiro1 = {
         1: image_goleiro1_esquerda,
         2: image_goleiro1_esquerda,  
@@ -40,6 +41,7 @@ def jogo_rodando(window):
         5: image_goleiro1_direita
     }
 
+    # Cria os Sprites da animação do goleiro2
     sprites_goleiro2 = {
         1: image_goleiro2_esquerda,
         2: image_goleiro2_esquerda,  

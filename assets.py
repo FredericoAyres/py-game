@@ -36,7 +36,7 @@ image_goleiro1_direita = pygame.transform.scale(image_goleiro1_direita, (160, 13
 image_goleiro1_esquerda = pygame.image.load('assets/img/Goleiro_esquerda_DesSoft.png')
 image_goleiro1_esquerda = pygame.transform.scale(image_goleiro1_esquerda, (160, 135))
 image_goleiro2_direita = pygame.image.load('assets/img/Goleiro2_direita_DesSoft.png')
-image_goleiro2_direita = pygame.transform.scale(image_goleiro2_direita, (160, 135))
+image_goleiro2_direita = pygame.transform.scale(image_goleiro2_direita, (170, 145))
 image_goleiro2_esquerda = pygame.image.load('assets/img/Goleiro2_esquerda_DesSoft.png')
 image_goleiro2_esquerda = pygame.transform.scale(image_goleiro2_esquerda, (160, 135))
 

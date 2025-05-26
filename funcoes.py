@@ -1,11 +1,6 @@
+# Esse arquvo é inútil para o jogo portanto não precisa ser comentado
+"""
 def desenhar_gol_estado(posicoes):
-    """
-    Desenha o gol com base em um dicionário de posições:
-    - 0: posição vazia → mostra o número da posição
-    - 1: chute do jogador ('C')
-    - 2: defesa do goleiro ('G')
-    - 3: ambos no mesmo lugar ('X')
-    """
     simbolos = {
         0: None,   # Mostra o número da posição
         1: 'C',
@@ -44,17 +39,6 @@ def soma_dicionarios(dicionario1, dicionario2):
     return dicionario
 
 def desenhar_gol_estado_3(posicoes):
-    """
-    Versão reduzida do gol com 3 posições:
-    - 1: canto esquerdo
-    - 2: meio
-    - 3: canto direito
-    Valores possíveis:
-    - 0: vazio → mostra o número da posição
-    - 1: chute do jogador ('C')
-    - 2: goleiro ('G')
-    - 3: ambos ('X')
-    """
     simbolos = {
         1: 'C',
         2: 'G',
@@ -88,4 +72,4 @@ def soma_dicionarios_alternadas(dicionario1, dicionario2):
         if x in dicionario:
             dicionario[x] += dicionario2[x]
     return dicionario
-
+"""
