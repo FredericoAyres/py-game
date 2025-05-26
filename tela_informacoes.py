@@ -1,6 +1,7 @@
 # Importa o módulo pygame e os estados do jogo necessários
 import pygame
 from config import INIT, QUIT, GAME_OVER, TELA_INFORMACOES
+from assets import *
 
 # Função que representa a tela de informações do jogo
 def tela_informacoes(window):
@@ -23,10 +24,6 @@ def tela_informacoes(window):
 
     running = True
     clock = pygame.time.Clock()
-
-    # Carrega e ajusta a imagem de fundo da tela
-    informacoes = pygame.image.load('assets/img/Informações_DesSoft.png').convert_alpha()
-    informacoes = pygame.transform.scale(informacoes, (800, 600))
 
     # Inicializa o mixer de áudio do jogo
     pygame.mixer.init()

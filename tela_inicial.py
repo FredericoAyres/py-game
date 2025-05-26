@@ -1,6 +1,7 @@
 # Importa o módulo pygame e as constantes de estado do jogo
 import pygame
 from config import INIT, QUIT, GAME, GAME_OVER, TELA_INFORMACOES
+from assets import *
 
 # Função que representa a tela inicial do jogo
 def tela_inicial(window):
@@ -27,10 +28,6 @@ def tela_inicial(window):
     running = True
     clock = pygame.time.Clock()
 
-    # Carrega e ajusta a imagem de fundo do menu
-    image_menu = pygame.image.load('assets/img/Menu_DesSoft.png').convert_alpha()
-    image_menu = pygame.transform.scale(image_menu, (800, 600))
-
     # Inicializa o mixer de áudio do jogo
     pygame.mixer.init()
 
@@ -42,18 +39,6 @@ def tela_inicial(window):
     for i in range(4):  # Segunda linha
         botao = pygame.Rect(150 + i * 130, 370, 100, 100)
         botoes.append(botao)
-
-    # Lista com os atalhos das músicas de cada time
-    musicas = [
-        'musicas/corinthians.mp3',
-        'musicas/sao_paulo.mp3',
-        'musicas/palmeiras.mp3',
-        'musicas/santos.mp3',
-        'musicas/flamengo.mp3',
-        'musicas/fluminense.mp3',
-        'musicas/botafogo.mp3',
-        'musicas/vasco.mp3'
-    ]
 
     # Lista com os nomes dos times
     times = [

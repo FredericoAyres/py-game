@@ -1,6 +1,7 @@
 # Importa o módulo pygame e os estados do jogo necessários
 import pygame
 from config import INIT, QUIT, GAME_OVER
+from assets import *
 
 # Função que exibe a tela de game over
 def game_over(window, resultado):
@@ -29,10 +30,6 @@ def game_over(window, resultado):
     # Relógio para controlar o intervalo entre frames
     clock = pygame.time.Clock()
 
-    # Carrega e redimensiona a imagem de fundo da tela de game over
-    image_game_over = pygame.image.load('assets/img/Game_over.jpg').convert_alpha()
-    image_game_over = pygame.transform.scale(image_game_over, (800, 600))
-
     # Cria os botões "Sim" e "Não" para jogar novamente ou sair
     botao_sim = pygame.Rect(215, 500, 150, 60)   # x, y, largura, altura
     botao_nao = pygame.Rect(440, 500, 150, 60)
@@ -51,7 +48,7 @@ def game_over(window, resultado):
 
     # Toca a música da tela de game over
     pygame.mixer.music.load('musicas/fox_sports.mp3')
-    pygame.mixer.music.play(loops=-1)
+    pygame.mixer.music.play()
 
     # Loop principal da tela de game over
     while running:

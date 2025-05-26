@@ -1,5 +1,6 @@
 import pygame
 import random
+from assets import *
 
 class Bola(pygame.sprite.Sprite):
     def __init__(self, img):
@@ -16,36 +17,36 @@ class Bola(pygame.sprite.Sprite):
 
     def update(self):
         if self.direcao == 1:
-            self.speedx = -280/60
-            self.speedy = -375/60
+            self.speedx = -280/FPS
+            self.speedy = -375/FPS
             if self.rect.x < 95:
                 self.speedx = 0
                 self.speedy = 0
                 self.direcao = 0
         if self.direcao == 2:
-            self.speedx = -280/60
-            self.speedy = -195/60
+            self.speedx = -280/FPS
+            self.speedy = -195/FPS
             if self.rect.x < 95:
                 self.speedx = 0
                 self.speedy = 0
                 self.direcao = 0
         if self.direcao == 3:
             self.speedx = 0
-            self.speedy = -325/60
+            self.speedy = -325/FPS
             if self.rect.y < 145:
                 self.speedx = 0
                 self.speedy = 0
                 self.direcao = 0
         if self.direcao == 4:
-            self.speedx = 285/60
-            self.speedy = -325/60
+            self.speedx = 285/FPS
+            self.speedy = -325/FPS
             if self.rect.x > 660:
                 self.speedx = 0
                 self.speedy = 0
                 self.direcao = 0
         if self.direcao == 5:
-            self.speedx = 285/60
-            self.speedy = -195/60
+            self.speedx = 285/FPS
+            self.speedy = -195/FPS
             if self.rect.x > 660:
                 self.speedx = 0
                 self.speedy = 0
@@ -69,8 +70,8 @@ class Jogador(pygame.sprite.Sprite):
 
     def update(self):
         if self.direcao in [1, 2, 3, 4, 5]:
-            self.speedx = 155/60
-            self.speedy = -100/60
+            self.speedx = 155/FPS
+            self.speedy = -100/FPS
             if self.rect.x > 310:
                 self.speedx = 0
                 self.speedy = 0
@@ -95,15 +96,15 @@ class Goleiro(pygame.sprite.Sprite):
         
     def update(self):
         if self.direcao == 1:
-            self.speedx = -205/60
-            self.speedy = -35/60
+            self.speedx = -205/FPS
+            self.speedy = -35/FPS
             self.image = self.dic[1]
             if self.rect.x < 40:
                 self.speedx = 0
                 self.speedy = 0
                 self.direcao = 0
         if self.direcao == 2:
-            self.speedx = -205/60
+            self.speedx = -205/FPS
             self.speedy = 0
             self.image = self.dic[2]
             if self.rect.x < 40:
@@ -112,22 +113,22 @@ class Goleiro(pygame.sprite.Sprite):
                 self.direcao = 0
         if self.direcao == 3:
             self.speedx = 0
-            self.speedy = -35/60
+            self.speedy = -35/FPS
             self.image = self.dic[3]
             if self.rect.y < 125:
                 self.speedx = 0
                 self.speedy = 0
                 self.direcao = 0
         if self.direcao == 4:
-            self.speedx = 360/60
-            self.speedy = -100/60
+            self.speedx = 360/FPS
+            self.speedy = -100/FPS
             self.image = self.dic[4]
             if self.rect.x > 590:
                 self.speedx = 0
                 self.speedy = 0
                 self.direcao = 0
         if self.direcao == 5:
-            self.speedx = 360/60
+            self.speedx = 360/FPS
             self.speedy = 0
             self.image = self.dic[5]
             if self.rect.x > 590:
